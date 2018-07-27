@@ -12,6 +12,7 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using SpotParkApi.Models;
+using Microsoft.AspNetCore.Mvc.Cors.Internal;
 
 namespace SpotParkApi
 {
@@ -27,8 +28,16 @@ namespace SpotParkApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                    builder => builder.AllowAnyOrigin()
+                    .AllowAnyMethod()
+                    .AllowAnyHeader()
+                    .AllowCredentials());
+            });
 
+            services.AddMvc();
             services.AddDbContext<SpotParkApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SpotParkApiContext")));
         }
@@ -44,7 +53,7 @@ namespace SpotParkApi
             {
                 app.UseHsts();
             }
-
+            app.UseCors("CorsPolicy");
             app.UseHttpsRedirection();
             app.UseMvc();
         }
