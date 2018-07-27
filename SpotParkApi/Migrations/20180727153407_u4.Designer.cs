@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SpotParkApi.Models;
 
 namespace SpotParkApi.Migrations
 {
     [DbContext(typeof(SpotParkApiContext))]
-    partial class SpotParkApiContextModelSnapshot : ModelSnapshot
+    [Migration("20180727153407_u4")]
+    partial class u4
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -68,7 +70,7 @@ namespace SpotParkApi.Migrations
                     b.Property<string>("Message")
                         .HasMaxLength(200);
 
-                    b.Property<long>("ParkingSpotID");
+                    b.Property<long?>("ParkingSpotID");
 
                     b.HasKey("ID");
 
@@ -79,10 +81,9 @@ namespace SpotParkApi.Migrations
 
             modelBuilder.Entity("SpotParkApi.Models.Report", b =>
                 {
-                    b.HasOne("SpotParkApi.Models.ParkingSpot", "ParkingSpot")
+                    b.HasOne("SpotParkApi.Models.ParkingSpot")
                         .WithMany("Reports")
-                        .HasForeignKey("ParkingSpotID")
-                        .OnDelete(DeleteBehavior.Cascade);
+                        .HasForeignKey("ParkingSpotID");
                 });
 #pragma warning restore 612, 618
         }

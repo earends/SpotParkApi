@@ -14,5 +14,6 @@ namespace SpotParkApi.Models
         }
 
         public DbSet<SpotParkApi.Models.ParkingSpot> ParkingSpot { get; set; }
+        public DbSet<SpotParkApi.Models.Report> Report { get; set; }
     }
 }

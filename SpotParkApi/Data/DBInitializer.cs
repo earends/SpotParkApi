@@ -27,7 +27,8 @@ namespace SpotParkApi.Data
                     Cost = 1,
                     AvailabilityStart = DateTime.Now,
                     AvailabilityEnd = DateTime.Now,
-                    Email = "test@gmail.com"
+                    Email = "test@gmail.com",
+                    ReportCount = 1
 
                 },
                 new ParkingSpot
@@ -40,7 +41,8 @@ namespace SpotParkApi.Data
                     Cost = 2,
                     AvailabilityStart = DateTime.Now,
                     AvailabilityEnd = DateTime.Now,
-                    Email = "test1@gmail.com"
+                    Email = "test1@gmail.com",
+                    ReportCount = 1
 
                 },
                 new ParkingSpot
@@ -53,7 +55,8 @@ namespace SpotParkApi.Data
                     Cost = 3,
                     AvailabilityStart = DateTime.Now,
                     AvailabilityEnd = DateTime.Now,
-                    Email = "test2@gmail.com"
+                    Email = "test2@gmail.com",
+                    ReportCount = 1
 
                 },
                 new ParkingSpot
@@ -66,7 +69,8 @@ namespace SpotParkApi.Data
                     Cost = 5,
                     AvailabilityStart = DateTime.Now,
                     AvailabilityEnd = DateTime.Now,
-                    Email = "test3@gmail.com"
+                    Email = "test3@gmail.com",
+                    ReportCount = 1
 
                 },
                 new ParkingSpot
@@ -79,7 +83,8 @@ namespace SpotParkApi.Data
                     Cost = 0,
                     AvailabilityStart = DateTime.Now,
                     AvailabilityEnd = DateTime.Now,
-                    Email = "test4@gmail.com"
+                    Email = "test4@gmail.com",
+                    ReportCount = 1
 
                 }
 
@@ -87,6 +92,21 @@ namespace SpotParkApi.Data
             foreach (ParkingSpot p in spots)
             {
                 context.ParkingSpot.Add(p);
+            }
+            context.SaveChanges();
+
+            var reports = new Report[]
+            {
+                new Report {Message = "Scam",Email = "testR@gmail.com",ParkingSpotID = 1},
+                new Report {Message = "Real Deal",Email = "testR1@gmail.com",ParkingSpotID = 2},
+                new Report {Message = "Fake",Email = "testR2@gmail.com",ParkingSpotID = 3},
+                new Report {Message = "Cool",Email = "testR3@gmail.com",ParkingSpotID = 4},
+                new Report {Message = "Roomy",Email = "testR4@gmail.com",ParkingSpotID = 5},
+            };
+
+            foreach (Report r in reports)
+            {
+                context.Report.Add(r);
             }
             context.SaveChanges();
         }
