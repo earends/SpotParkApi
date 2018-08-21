@@ -31,13 +31,13 @@ namespace SpotParkApi
             services.AddCors(options =>
             {
                 options.AddPolicy("CorsPolicy",
-                    builder => builder.AllowAnyOrigin()
-                    .AllowAnyMethod()
-                    .AllowAnyHeader()
-                    .AllowCredentials());
-            });
+                   builder => builder.AllowAnyOrigin()
+                   .AllowAnyMethod()
+                   .AllowAnyHeader()
+                   .AllowCredentials());
+                   });
 
-            services.AddMvc();
+                services.AddMvc();
             services.AddDbContext<SpotParkApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SpotParkApiContext")));
         }

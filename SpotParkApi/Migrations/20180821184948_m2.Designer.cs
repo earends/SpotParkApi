@@ -10,14 +10,14 @@ using SpotParkApi.Models;
 namespace SpotParkApi.Migrations
 {
     [DbContext(typeof(SpotParkApiContext))]
-    [Migration("20180726175054_u2")]
-    partial class u2
+    [Migration("20180821184948_m2")]
+    partial class m2
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -39,10 +39,9 @@ namespace SpotParkApi.Migrations
                     b.Property<string>("Location")
                         .IsRequired();
 
-                    b.Property<string>("LocationIdentifier")
-                        .HasMaxLength(25);
-
-                    b.Property<double>("Size");
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
                     b.Property<string>("SpecialInstructions")
                         .HasMaxLength(500);

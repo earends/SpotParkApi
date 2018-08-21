@@ -10,14 +10,14 @@ using SpotParkApi.Models;
 namespace SpotParkApi.Migrations
 {
     [DbContext(typeof(SpotParkApiContext))]
-    [Migration("20180727155907_u7")]
-    partial class u7
+    [Migration("20180821184447_m1")]
+    partial class m1
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
+                .HasAnnotation("ProductVersion", "2.1.1-rtm-30846")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -39,12 +39,13 @@ namespace SpotParkApi.Migrations
                     b.Property<string>("Location")
                         .IsRequired();
 
-                    b.Property<string>("LocationIdentifier")
-                        .HasMaxLength(25);
+                    b.Property<DateTime>("ROWVERSION")
+                        .IsConcurrencyToken()
+                        .ValueGeneratedOnAddOrUpdate();
 
-                    b.Property<int>("ReportCount");
-
-                    b.Property<double>("Size");
+                    b.Property<string>("Size")
+                        .IsRequired()
+                        .HasMaxLength(10);
 
                     b.Property<string>("SpecialInstructions")
                         .HasMaxLength(500);
@@ -56,35 +57,6 @@ namespace SpotParkApi.Migrations
                     b.HasKey("ID");
 
                     b.ToTable("ParkingSpot");
-                });
-
-            modelBuilder.Entity("SpotParkApi.Models.Report", b =>
-                {
-                    b.Property<long>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Email")
-                        .IsRequired();
-
-                    b.Property<string>("Message")
-                        .HasMaxLength(200);
-
-                    b.Property<long>("ParkingSpotID");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("ParkingSpotID");
-
-                    b.ToTable("Report");
-                });
-
-            modelBuilder.Entity("SpotParkApi.Models.Report", b =>
-                {
-                    b.HasOne("SpotParkApi.Models.ParkingSpot", "ParkingSpot")
-                        .WithMany("Reports")
-                        .HasForeignKey("ParkingSpotID")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 #pragma warning restore 612, 618
         }

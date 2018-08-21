@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SpotParkApi.Migrations
 {
-    public partial class initial : Migration
+    public partial class m1 : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -14,14 +14,15 @@ namespace SpotParkApi.Migrations
                 {
                     ID = table.Column<long>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    Title = table.Column<string>(nullable: true),
-                    Size = table.Column<int>(nullable: false),
-                    Location = table.Column<string>(nullable: true),
-                    LocationIdentifier = table.Column<string>(nullable: true),
-                    SpecialInstructions = table.Column<string>(nullable: true),
+                    ROWVERSION = table.Column<DateTime>(nullable: false),
+                    Title = table.Column<string>(maxLength: 50, nullable: false),
+                    Size = table.Column<string>(maxLength: 10, nullable: false),
+                    Location = table.Column<string>(nullable: false),
+                    SpecialInstructions = table.Column<string>(maxLength: 500, nullable: true),
                     Cost = table.Column<double>(nullable: false),
-                    Availability = table.Column<DateTime>(nullable: false),
-                    Email = table.Column<string>(nullable: true)
+                    AvailabilityStart = table.Column<DateTime>(nullable: false),
+                    AvailabilityEnd = table.Column<DateTime>(nullable: false),
+                    Email = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
