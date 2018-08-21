@@ -8,6 +8,7 @@ namespace SpotParkApi.Models
 {
     public class ParkingSpot
     {
+       
         public long ID { get; set; }
 
         
