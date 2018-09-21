@@ -28,31 +28,11 @@ namespace SpotParkApi
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(options =>
-            {
-                options.AddPolicy("CorsPolicy",
-                   builder => builder.AllowAnyOrigin()
-                   .AllowAnyMethod()
-                   .AllowAnyHeader()
-                   .AllowCredentials());
-                   });
+            
 
                 services.AddMvc();
-            /*
-             * add extra line of comments
             services.AddDbContext<SpotParkApiContext>(options =>
                     options.UseSqlServer(Configuration.GetConnectionString("SpotParkApiContext")));
-            */
-            // Use SQL Database if in Azure, otherwise, use SQLite
-            if (Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") == "Production")
-                services.AddDbContext<SpotParkApiContext>(options =>
-                        options.UseSqlServer(Configuration.GetConnectionString("Server=tcp:serverwestevan.database.windows.net,1433;Database=coreDB;User ID=evanarends;Password=Passw0rd!;Encrypt=true;Connection Timeout=30;")));
-            else
-                services.AddDbContext<SpotParkApiContext>(options =>
-                        options.UseSqlServer("Data Source=localdatabase.db"));
-
-            // Automatically perform database migration
-            services.BuildServiceProvider().GetService<SpotParkApiContext>().Database.Migrate();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -66,7 +46,7 @@ namespace SpotParkApi
             {
                 app.UseHsts();
             }
-            app.UseCors("CorsPolicy");
+           
             app.UseHttpsRedirection();
             app.UseMvc();
         }

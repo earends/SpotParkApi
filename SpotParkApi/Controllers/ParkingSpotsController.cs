@@ -19,7 +19,7 @@ namespace SpotParkApi.Controllers
         {
             _context = context;
         }
-
+        //new change
         // GET: api/ParkingSpots
         [HttpGet]
         public IEnumerable<ParkingSpot> GetParkingSpot()
